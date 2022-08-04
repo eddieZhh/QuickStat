@@ -17,3 +17,33 @@ jobs:
       uses: JamesIves/github-pages-deploy-action@v4
       with:
         folder: . # The folder the action should deploy.
+    - name: Post
+      run: |
+        curl --location --request POST 'https://icfonline.webhook.office.com/webhookb2/c9180f06-a7a0-4269-961e-e3a08acd8156@cf90b97b-be46-4a00-9700-81ce4ff1b7f6/IncomingWebhook/25e566b8e5db40f6a4add7f4e8114e3c/0f32cfeb-181b-4b0e-8281-38669806ebf1' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+          "summary": "Testing Report",
+          "themeColor": "0078D7",
+          "title": "Testing Report",
+          "sections": [
+            {
+              "activityTitle": "Quick Stat Testing report",
+              "activityImage": "",
+              "facts": [
+                {
+                  "name": "HTML Testing Report:",
+                  "value": "[Testing resutls Link](https://eddiezhh.github.io/QuickStat/)"
+                },
+                {
+                  "name": "Posted by:",
+                  "value": "Eddie"
+                },
+                {
+                  "name": "Post Date:",
+                  "value": "(none)"
+                }
+              ]
+            }
+          ]
+        }'
+  
