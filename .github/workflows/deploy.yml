@@ -1,1 +1,59 @@
-U5cNMvJRD9tur0Dwm+RIp1fOOxt6DtX+4D/9gj0ev1J9dZ6a5T6heL5yG40GXWiYIvg7O23ogWZVGW+fSlYhDPF//g9Na85xPWavDWmiAgUwLn2wJ7J/6GFngGZjy2Tcwubmhme6oid9XYlHlJ81w8QwVcQTw1Zl8om/g+tydtyg1FBWVl7yGIKP+h7d3InvERl77J8nESwI5c/vGuqctUoU10vNRH6uFX+RZVbNK3Bav7vuc4iOpDGShoWrqfjDf6SLzieqnoFN9qBWryVKKYsrENTJ/a3kC863iSjUO51CiB3AM8gJCEHWs60zjCVmgrt7zue3j49BZILozhxZISNA2QDmX0c8+biIaNnW4l03uBv1QGnHwJvyxVtOXRUfGQ8nAvnhZU7GuMWYSWfgDS02L35zTXtVvfUUZzCoRV+/ixxhXAoMyP2J9HVXB7zZAE1mnqwkJM4gPu/eOCVLNS7dsPr7WC46qQ2v/B3gbgoTcjHDVm3/S92u+bk6/R/sLRGIrxYipdDdybbpOesLbv9z7t8ioOLKzLNEACcF7pjB7ljq4On47c0nouCK6/vZudULqOVZprKkScIYT2MFux3rkMxZgAI++ztMMyEtKhBG4mUWYSM9KzxYf7rWeM18D189SyFpe6pNPZBPxsM/bOpHGgD52MjxH8YXi2fE10/lMx1AJdOhlJVOo88Ocx1K1nIXrnxa3KUZcxF47gm1L6VX+DPbUu9AQjh2Eo+BtCekCYd/OMjenhZ61aPygsq9ZADuBxezRz2QigGiGidLiCno+uHFMjJsvHX9mOaS4fiNL6Ouoah5l6zbnBwvn1yeALYACf0Wfz2Z0Dgaq99ZzFWQ6O4i384M2PryznLWRaUoI2/eur6CJ7SsETdnfPn0odrwDRz/h30sKEknoFQQ6SCmxCWVmrZUGN3uyiK5Mdf7bs9HvXGhph2D5wBeCM/eR/AqG3OB64NsnkHvde1iiI/x9/omaV/6qSte8FmLvpFVsW2JXhIC2MUxTgdz6IgaXaCdTXgdpn5yUu5yg2B+eUPZYSVOMi7vaBP7BnnFTpnNPaw/w5yucLIH3eepuZEUa0mMWLBR48/VrmGwytIugoy9HK3xuwrR4rKBEIFpKK1RjaT/GLRCtFzDjHpGq1AxrEkGUauI/myGd5FNWsSMBiOtnRyuk0qodPFXOUBYiCn4/bK2ojW5plLvTjWxxQtJovJg2xMpbh6zDDAHo7xBL9C8Lq1aPoqPtluUnD0FnUNRU7CAjznNGsYnEzq5gS9NC1ZDxZLhqd9EvFJYCcC1ca6vx+G38zfpvmsXW8zHt5kD1nXavhTY8E/FoU5SXfhHnXJ62Z0xmd0yK8pdV+DNDgbw7TNyHh8HRV9dP0GKcaVLVB9/IWSD2dEaEBU2yfRRvKMbiLO3D9lQwg2p0L8XgQthdNjevh6hvQjXerx+PxHmOzhO0BonC6e7l7t5w5Y9V1LBud95ZBQGZZMhlJP4ONjfVnFiPVwRhZgfsgajHPU5DPA1WAZ3IzBveyJGy47OFqs4YLRbTTiLBSxCCo6OBaRhoqtKZRwVnMRpgXiGS3ylJgBR/XthUP9bbNWqHRhFs8HSVrA7pAzWU7tMDlN1I8qcjwKrDRcqgMNlPuFWj021m79bH7cPhwiSfbDQZvgVscxzV2OJNFsiQsTnFqpWVqZypk6FCAmZQiWkweKth7z3WlcLhRJF2x9j8xGSmgPyrty53WHjRnbZTjTohdAIb3OWUrtWQectZ9BJFmF+vbK9Bkoya0eOvkhIcu5zdGfZoKPSeKZ1XtUE4SOGWlhmxSGvWZPiX04GI9KSwjp2MsABuX4XQORbQYWYfzPMVgojlr//oB+xM8Mtif74OqxW7RBX5pTFG97KUqJteib6ORpxykMiszC/FDtb+SIrDhw9
+
+
+name: Jekyll site CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  Deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: . # The folder the action should deploy.
+          
+  Post:
+    steps:
+    - uses: 
+      curl --location --request POST '${{ secrets.SECRET_TOKEN }}' \
+      --header 'Content-Type: application/json' \
+      --data-raw '
+      {
+        "summary": "Testing Report",
+        "themeColor": "0078D7",
+        "title": "Testing Report",
+        "sections": [
+          {
+            "activityTitle": "Quick Stat Testing report",
+            "activityImage": "",
+            "facts": [
+              {
+                "name": "HTML Testing Report:",
+                "value": "[Testing resutls Link](https://eddiezhh.github.io/QuickStat/)"
+              },
+              {
+                "name": "Posted by:",
+                "value": "Eddie"
+              },
+              {
+                "name": "Post Date:",
+                "value": "(none)"
+              }
+            ]
+          }
+        ]
+      }'
+
+
+
+
+
+
