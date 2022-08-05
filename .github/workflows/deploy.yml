@@ -11,13 +11,13 @@ on:
 jobs:
   Deploy:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest 
 
     steps:
     - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: . # The folder the action should deploy.
+          folder: . # The folder the action should deploy the changes.
           
   Post:
     steps:
