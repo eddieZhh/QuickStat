@@ -15,9 +15,9 @@ jobs:
 
     steps:
     - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: . # The folder the action should deploy the changes.
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: . # The folder the action should deploy the changes.
           
   Post:
     steps:
